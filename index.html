@@ -3,127 +3,244 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sample Pages</title>
+  <title>SWITCH4U'S PORTAL</title>
   <style>
     :root {
-      color-scheme: light;
-      --bg1: #0f172a;
-      --bg2: #1e293b;
-      --card: rgba(255, 255, 255, 0.12);
-      --text: #e5eefc;
-      --muted: #bfd0ee;
-      --accent: #7dd3fc;
-      --accent2: #a78bfa;
-      --border: rgba(255, 255, 255, 0.18);
-      --shadow: 0 20px 50px rgba(15, 23, 42, 0.35);
+      color-scheme: dark;
+      --bg: #060816;
+      --bg-deep: #0b1023;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.14);
+      --text: #eef4ff;
+      --muted: rgba(238, 244, 255, 0.72);
+      --line: rgba(255, 255, 255, 0.16);
+      --cyan: #6ee7ff;
+      --pink: #ff7ad9;
+      --violet: #9d8cff;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
     }
 
     * {
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       margin: 0;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
+      min-height: 100%;
+      overflow: hidden;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(125, 211, 252, 0.18), transparent 32%),
-        radial-gradient(circle at bottom right, rgba(167, 139, 250, 0.2), transparent 28%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
+        radial-gradient(circle at 20% 20%, rgba(110, 231, 255, 0.12), transparent 24%),
+        radial-gradient(circle at 80% 25%, rgba(255, 122, 217, 0.16), transparent 24%),
+        radial-gradient(circle at 50% 85%, rgba(157, 140, 255, 0.14), transparent 28%),
+        linear-gradient(140deg, var(--bg), var(--bg-deep) 55%, #05070f);
+      color: var(--text);
+    }
+
+    body {
+      position: relative;
       display: grid;
       place-items: center;
       padding: 24px;
+      isolation: isolate;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(18px);
+      opacity: 0.72;
+      mix-blend-mode: screen;
+      animation: drift 16s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      width: 380px;
+      height: 380px;
+      left: -80px;
+      top: -40px;
+      background: radial-gradient(circle, rgba(110, 231, 255, 0.95), rgba(110, 231, 255, 0));
+    }
+
+    .orb.two {
+      width: 320px;
+      height: 320px;
+      right: -60px;
+      top: 12%;
+      background: radial-gradient(circle, rgba(255, 122, 217, 0.95), rgba(255, 122, 217, 0));
+      animation-duration: 19s;
+    }
+
+    .orb.three {
+      width: 420px;
+      height: 420px;
+      bottom: -120px;
+      left: 40%;
+      background: radial-gradient(circle, rgba(157, 140, 255, 0.9), rgba(157, 140, 255, 0));
+      animation-duration: 22s;
+    }
+
+    .noise,
+    .grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .noise {
+      opacity: 0.06;
+      background-image:
+        radial-gradient(rgba(255, 255, 255, 0.7) 0.6px, transparent 0.6px);
+      background-size: 9px 9px;
+    }
+
+    .grid {
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+      opacity: 0.28;
     }
 
     .card {
-      width: min(720px, 100%);
-      padding: 48px 40px;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      background: var(--card);
-      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 1;
+      width: min(760px, 100%);
+      padding: clamp(28px, 5vw, 56px);
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      border: 1px solid var(--line);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      overflow: hidden;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 8px 14px;
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(110, 231, 255, 0.12), transparent 30%, rgba(255, 122, 217, 0.12));
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 15px;
       border-radius: 999px;
-      background: rgba(125, 211, 252, 0.14);
-      border: 1px solid rgba(125, 211, 252, 0.24);
-      color: var(--accent);
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      box-shadow: 0 0 18px rgba(110, 231, 255, 0.9);
     }
 
     h1 {
-      margin: 20px 0 16px;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      line-height: 1.1;
+      margin: 22px 0 12px;
+      font-size: clamp(2.8rem, 8vw, 5.8rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      text-shadow:
+        0 0 18px rgba(110, 231, 255, 0.14),
+        0 0 40px rgba(255, 122, 217, 0.14);
     }
 
-    p {
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #d9f7ff 35%, #ffd8f2 70%, #f1e7ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
       margin: 0;
+      max-width: 34rem;
       color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.8;
-    }
-
-    .actions {
-      margin-top: 28px;
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 160px;
-      padding: 14px 20px;
-      border-radius: 14px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
-    }
-
-    .button.primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #0f172a;
-    }
-
-    .button.secondary {
-      border: 1px solid var(--border);
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      opacity: 0.95;
+      font-size: clamp(1rem, 2.4vw, 1.2rem);
+      line-height: 1.9;
+      text-wrap: balance;
     }
 
     .footer {
-      margin-top: 28px;
-      font-size: 0.92rem;
-      color: rgba(229, 238, 252, 0.7);
+      margin-top: 34px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      color: rgba(238, 244, 255, 0.84);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .signature {
+      margin-top: 22px;
+      font-size: 0.9rem;
+      color: rgba(238, 244, 255, 0.52);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      to {
+        transform: translate3d(24px, -18px, 0) scale(1.08);
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px;
+      }
+
+      .card {
+        border-radius: 24px;
+      }
+
+      .subtitle {
+        line-height: 1.75;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+  <div class="noise"></div>
+  <div class="grid"></div>
+
   <main class="card">
-    <span class="badge">Cloudflare Pages</span>
-    <h1>シンプルだけど、ちょっと気持ちいいページへ。</h1>
-    <p>
-      このサンプルページは、最小構成の静的サイトを少しだけ整えたものです。
-      テキスト中心でも、余白と色を少し入れるだけで見た目はかなり変わります。
+    <div class="eyebrow"><span class="dot"></span> chill mode enabled</div>
+    <h1><span class="gradient-text">SWITCH4U'S<br>PORTAL</span></h1>
+    <p class="subtitle">
+      Just chilling here, glowing softly in the dark.
+      No utility, no urgency, just a small beautiful signal saying this place is alive.
     </p>
-    <div class="actions">
-      <a class="button primary" href="https://pages.cloudflare.com/" target="_blank" rel="noreferrer">Cloudflare Pages</a>
+    <div class="footer">
+      <span class="pill">glassmorphism</span>
+      <span class="pill">neon haze</span>
+      <span class="pill">midnight mood</span>
     </div>
-    <div class="footer">sample-pages / index.html only</div>
+    <div class="signature">made to simply look good</div>
   </main>
 </body>
 </html>
